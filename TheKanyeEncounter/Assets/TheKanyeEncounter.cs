@@ -153,7 +153,7 @@ public class TheKanyeEncounter : MonoBehaviour {
       }
       for (int i = 0; i < Valid.Length; i++) {
         if (Valid[i]) {
-          Debug.LogFormat("[The Kanye Encounter #{0}] {1} farthest one up on the table, so therefore Kanye will be most pleased with that.", moduleId, FoodsButCodeText[i]);
+          Debug.LogFormat("[The Kanye Encounter #{0}] {1} is the farthest one up on the table, so therefore Kanye will be most pleased with that.", moduleId, FoodsButCodeText[i]);
           for (int j = i + 1; j < Valid.Length; j++) {
             Valid[j] = false;
           }

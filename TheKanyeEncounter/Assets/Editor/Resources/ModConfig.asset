@@ -14,7 +14,7 @@ MonoBehaviour:
   id: TheKanyeEncounter
   title: The Kanye Encounter
   author: Me
-  description: "Are you prepared with the sustenance that Kanye\r\ndesires?"
+  description: "Are you prepared with the sustenance that Kanye\r desires?"
   version: 
   outputFolder: build
-  previewImage: {fileID: 2800000, guid: 8e5d41d4342274041a5c6f0f14ca2e34, type: 3}
+  previewImage: {fileID: 2800000, guid: d5af7d5cd0fca48419866e61b2b3aa5a, type: 3}
