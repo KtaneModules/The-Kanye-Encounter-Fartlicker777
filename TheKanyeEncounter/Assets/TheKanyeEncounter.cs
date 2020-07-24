@@ -32,6 +32,7 @@ public class TheKanyeEncounter : MonoBehaviour {
     string PissedOff = "i understand,\nhowever i am still\ndisappointed";
     string PleasedOff = "Thank you for the\noffering";
     int Jon = -1000000;
+    bool PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj = false;
 
     void Awake () {
         moduleId = moduleIdCounter++;
@@ -175,41 +176,44 @@ public class TheKanyeEncounter : MonoBehaviour {
     }
 
     void KanyePress(KMSelectable Kanye) {
-      for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < FoodsButCodeText.Length; j++) {
-          if (Foods[i].text == FoodsButCodeText[j]) {
-            if (Valid[j]) {
-              ButtonOrder[i] = true;
+      if (!PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj) {
+        for (int i = 0; i < 3; i++) {
+          for (int j = 0; j < FoodsButCodeText.Length; j++) {
+            if (Foods[i].text == FoodsButCodeText[j]) {
+              if (Valid[j]) {
+                ButtonOrder[i] = true;
+              }
             }
           }
         }
-      }
-      for (int i = 0; i < 4; i++) {
-        if (Kanye == Kanyes[i]) {
-          if (i != 3 && ButtonOrder[i]) {
-            StartCoroutine(KanyeIsPleased());
-            Debug.LogFormat("[The Kanye Encounter #{0}] You selected the best option. Kanye is pleased.", moduleId);
-          }
-          else if (i == 3 && !ButtonOrder[0] && !ButtonOrder[1] && !ButtonOrder[2]) {
-            StartCoroutine(KanyeIsPleased());
-            Debug.LogFormat("[The Kanye Encounter #{0}] No other option was valid, so you chose Garlic Bread. Kanye is pleased.", moduleId);
-          }
-          else {
-            for (int j = 0; j < FoodsButCodeText.Length; j++) {
-              if (i == 3) {
-                Debug.LogFormat("[The Kanye Encounter #{0}] You selected Garlic Bread, but that was the least desirable option. Kanye is disappointed...", moduleId);
-              }
-              if (Foods[i].text == FoodsButCodeText[j] && i != 3) {
-                Debug.LogFormat("[The Kanye Encounter #{0}] You selected {1} which is incorrect. Kanye is disappointed...", moduleId, FoodsButCodeText[j]);
-              }
+        for (int i = 0; i < 4; i++) {
+          if (Kanye == Kanyes[i]) {
+            if (i != 3 && ButtonOrder[i]) {
+              StartCoroutine(KanyeIsPleased());
+              Debug.LogFormat("[The Kanye Encounter #{0}] You selected the best option. Kanye is pleased.", moduleId);
             }
-            StartCoroutine(KanyeIsPissed());
+            else if (i == 3 && !ButtonOrder[0] && !ButtonOrder[1] && !ButtonOrder[2]) {
+              StartCoroutine(KanyeIsPleased());
+              Debug.LogFormat("[The Kanye Encounter #{0}] No other option was valid, so you chose Garlic Bread. Kanye is pleased.", moduleId);
+            }
+            else {
+              for (int j = 0; j < FoodsButCodeText.Length; j++) {
+                if (i == 3) {
+                  Debug.LogFormat("[The Kanye Encounter #{0}] You selected Garlic Bread, but that was the least desirable option. Kanye is disappointed...", moduleId);
+                }
+                if (Foods[i].text == FoodsButCodeText[j] && i != 3) {
+                  Debug.LogFormat("[The Kanye Encounter #{0}] You selected {1} which is incorrect. Kanye is disappointed...", moduleId, FoodsButCodeText[j]);
+                }
+              }
+              StartCoroutine(KanyeIsPissed());
+            }
           }
         }
       }
     }
 
     IEnumerator KanyeIsPleased() {
+      PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj = true;
       Ass = false;
       moduleSolved = true;
       for (int i = 0; i < 4; i++) {
@@ -228,9 +232,11 @@ public class TheKanyeEncounter : MonoBehaviour {
         yield return new WaitForSeconds(.1f);
       }
       StopAllCoroutines();
+      PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj = false;
     }
 
     IEnumerator KanyeIsPissed() {
+      PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj = true;
       Ass = false;
       for (int i = 0; i < 4; i++) {
         Foods[i].text = "";
@@ -254,6 +260,7 @@ public class TheKanyeEncounter : MonoBehaviour {
       GetComponent<KMBombModule>().HandleStrike();
       FoodPicker();
       Ass = true;
+      PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj = false;
     }
 
     void Update () {
