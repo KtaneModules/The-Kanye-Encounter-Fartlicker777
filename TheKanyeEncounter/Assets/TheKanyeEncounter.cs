@@ -280,15 +280,19 @@ public class TheKanyeEncounter : MonoBehaviour {
     IEnumerator ProcessTwitchCommand(string Command) {
       Command = Command.Trim();
       if (Command.ToLower() == "highlight") {
+        yield return null;
         sdijdnijknjdsanjkfdaknjfd.OnHighlight();
         yield break;
       }
-      if (int.Parse(Command) != 1 && int.Parse(Command) != 2 && int.Parse(Command) != 3 && int.Parse(Command) != 4) {
-        yield return "sendtochaterror Invalid command!";
-        yield break;
-      }
-      else {
-        Kanyes[int.Parse(Command) - 1].OnInteract();
+      int Whateverthefuckyouwanttocallit = 0;
+      if (int.TryParse(Command, out Whateverthefuckyouwanttocallit)) {
+        if (Whateverthefuckyouwanttocallit != 1 && Whateverthefuckyouwanttocallit != 2 && Whateverthefuckyouwanttocallit != 3 && Whateverthefuckyouwanttocallit != 4) {
+          yield return "sendtochaterror Invalid command!";
+          yield break;
+        }
+        else {
+          Kanyes[int.Parse(Command) - 1].OnInteract();
+        }
       }
     }
 }
