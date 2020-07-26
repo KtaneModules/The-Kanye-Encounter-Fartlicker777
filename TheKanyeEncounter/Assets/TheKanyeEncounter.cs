@@ -26,7 +26,6 @@ public class TheKanyeEncounter : MonoBehaviour {
     string Feeling = "";
     bool[] Valid = {false, false, false, false, false, false, false, false, false, false, false, false};
     bool[] ButtonOrder = {false, false, false};
-    bool AidsModuleCheck = false;
     float Merica = 0;
     bool INeedAbool = false;
     string PissedOff = "i understand,\nhowever i am still\ndisappointed";
@@ -73,93 +72,6 @@ public class TheKanyeEncounter : MonoBehaviour {
       for (int i = 0; i < 3; i++) {
         Debug.LogFormat("[The Kanye Encounter #{0}] Option {1} is {2}.", moduleId, i + 1, FoodsButCodeText[FooderPickerNumberSelector[i]]);
       }
-      for (int i = 0; i < 3; i++) {
-        switch (FoodsButCodeText[FooderPickerNumberSelector[i]]) {
-          case "Onion":
-          if (Feeling == "Presidential" || Feeling == "Confused") {
-            Valid[0] = true;
-            Debug.LogFormat("[The Kanye Encounter #{0}] Onion is currently valid.", moduleId);
-          }
-          break;
-          case "Corn": Debug.LogFormat("[The Kanye Encounter #{0}] Corn is inedible.", moduleId); break;
-          case "big MIOLK":
-          for (int j = 0; j < 6; j++) {
-            if (Bomb.GetSerialNumber()[j].ToString() == "B" || Bomb.GetSerialNumber()[j].ToString() == "1" || Bomb.GetSerialNumber()[j].ToString() == "G" || Bomb.GetSolvableModuleNames().Contains("Painting")) {
-              Valid[2] = true;
-            }
-          }
-          if (Valid[2]) {
-            Debug.LogFormat("[The Kanye Encounter #{0}] big MIOLK is currently valid.", moduleId);
-          }
-          break;
-          case "Yam":
-          if (AidsModuleCheck) {
-            Valid[3] = true;
-            Debug.LogFormat("[The Kanye Encounter #{0}] Yam is currently valid.", moduleId);
-          }
-          break;
-          case "Corn Cube":
-          if (Feeling == "") {
-            Valid[4] = true;
-            Debug.LogFormat("[The Kanye Encounter #{0}] Corn Cube is currently valid.", moduleId);
-          }
-          break;
-          case "Egg":
-          if (DateTime.Now.DayOfWeek.ToString() == "Monday" || DateTime.Now.DayOfWeek.ToString() == "Wednesday" || DateTime.Now.DayOfWeek.ToString() == "Friday") {
-            Valid[5] = true;
-            Debug.LogFormat("[The Kanye Encounter #{0}] Egg is currently valid.", moduleId);
-          }
-          break;
-          case "Eggchips":
-          if (Bomb.GetPortCount() == 0) {
-            Valid[6] = true;
-            Debug.LogFormat("[The Kanye Encounter #{0}] Eggchips is currently valid.", moduleId);
-          }
-          break;
-          case "hamger":
-          if (!(Bomb.GetPorts().Distinct().Count() == Bomb.GetPorts().Count())) {
-            Valid[7] = true;
-            Debug.LogFormat("[The Kanye Encounter #{0}] hamger is currently valid.", moduleId);
-          }
-          break;
-          case "Tyler the Creator":
-          if (Feeling == "Angery" || Feeling == "Confused") {
-            Valid[8] = true;
-            Debug.LogFormat("[The Kanye Encounter #{0}] Tyler the Creator is currently valid.", moduleId);
-          }
-          break;
-          case "Onionade":
-          if (!(Feeling == "Happy" || Feeling == "")) {
-            Valid[9] = true;
-            Debug.LogFormat("[The Kanye Encounter #{0}] Onionade is currently valid.", moduleId);
-          }
-          break;
-          case "Soup":
-          if (INeedAbool) {
-            Valid[10] = true;
-            Debug.LogFormat("[The Kanye Encounter #{0}] Soup is currently valid.", moduleId);
-          }
-          break;
-          case "jeb":
-          for (int j = 0; j < 6; j++) {
-            if (!(Bomb.GetSerialNumber()[j].ToString() == "J" || Bomb.GetSerialNumber()[j].ToString() == "E" || Bomb.GetSerialNumber()[j].ToString() == "B")) {
-              Valid[11] = true;
-            }
-          }
-          if (Valid[11]) {
-            Debug.LogFormat("[The Kanye Encounter #{0}] jeb is currently valid.", moduleId);
-          }
-          break;
-        }
-      }
-      for (int i = 0; i < Valid.Length; i++) {
-        if (Valid[i]) {
-          Debug.LogFormat("[The Kanye Encounter #{0}] {1} is the farthest one up on the table, so therefore Kanye will be most pleased with that.", moduleId, FoodsButCodeText[i]);
-          for (int j = i + 1; j < Valid.Length; j++) {
-            Valid[j] = false;
-          }
-        }
-      }
     }
 
     IEnumerator Weed() {
@@ -178,11 +90,98 @@ public class TheKanyeEncounter : MonoBehaviour {
     void KanyePress(KMSelectable Kanye) {
       if (!PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj) {
         for (int i = 0; i < 3; i++) {
+          switch (FoodsButCodeText[FooderPickerNumberSelector[i]]) {
+            case "Onion":
+            if (Feeling == "Presidential" || Feeling == "Confused") {
+              Valid[0] = true;
+              Debug.LogFormat("[The Kanye Encounter #{0}] Onion is currently valid.", moduleId);
+            }
+            break;
+            case "Corn": Debug.LogFormat("[The Kanye Encounter #{0}] Corn is inedible.", moduleId); break;
+            case "big MIOLK":
+            for (int j = 0; j < 6; j++) {
+              if (Bomb.GetSerialNumber()[j].ToString() == "B" || Bomb.GetSerialNumber()[j].ToString() == "1" || Bomb.GetSerialNumber()[j].ToString() == "G" || Bomb.GetSolvableModuleNames().Contains("Painting")) {
+                Valid[2] = true;
+              }
+            }
+            if (Valid[2]) {
+              Debug.LogFormat("[The Kanye Encounter #{0}] big MIOLK is currently valid.", moduleId);
+            }
+            break;
+            case "Yam":
+            if (Bomb.GetSolvedModuleNames().Count == 0) {
+              Valid[3] = true;
+              Debug.LogFormat("[The Kanye Encounter #{0}] Yam is currently valid.", moduleId);
+            }
+            break;
+            case "Corn Cube":
+            if (Feeling == "") {
+              Valid[4] = true;
+              Debug.LogFormat("[The Kanye Encounter #{0}] Corn Cube is currently valid.", moduleId);
+            }
+            break;
+            case "Egg":
+            if (DateTime.Now.DayOfWeek.ToString() == "Monday" || DateTime.Now.DayOfWeek.ToString() == "Wednesday" || DateTime.Now.DayOfWeek.ToString() == "Friday") {
+              Valid[5] = true;
+              Debug.LogFormat("[The Kanye Encounter #{0}] Egg is currently valid.", moduleId);
+            }
+            break;
+            case "Eggchips":
+            if (Bomb.GetPortCount() == 0) {
+              Valid[6] = true;
+              Debug.LogFormat("[The Kanye Encounter #{0}] Eggchips is currently valid.", moduleId);
+            }
+            break;
+            case "hamger":
+            if (!(Bomb.GetPorts().Distinct().Count() == Bomb.GetPorts().Count())) {
+              Valid[7] = true;
+              Debug.LogFormat("[The Kanye Encounter #{0}] hamger is currently valid.", moduleId);
+            }
+            break;
+            case "Tyler the Creator":
+            if (Feeling == "Angery" || Feeling == "Confused") {
+              Valid[8] = true;
+              Debug.LogFormat("[The Kanye Encounter #{0}] Tyler the Creator is currently valid.", moduleId);
+            }
+            break;
+            case "Onionade":
+            if (!(Feeling == "Happy" || Feeling == "")) {
+              Valid[9] = true;
+              Debug.LogFormat("[The Kanye Encounter #{0}] Onionade is currently valid.", moduleId);
+            }
+            break;
+            case "Soup":
+            if (INeedAbool) {
+              Valid[10] = true;
+              Debug.LogFormat("[The Kanye Encounter #{0}] Soup is currently valid.", moduleId);
+            }
+            break;
+            case "jeb":
+            for (int j = 0; j < 6; j++) {
+              if (!(Bomb.GetSerialNumber()[j].ToString() == "J" || Bomb.GetSerialNumber()[j].ToString() == "E" || Bomb.GetSerialNumber()[j].ToString() == "B")) {
+                Valid[11] = true;
+              }
+            }
+            if (Valid[11]) {
+              Debug.LogFormat("[The Kanye Encounter #{0}] jeb is currently valid.", moduleId);
+            }
+            break;
+          }
+        }
+        for (int i = 0; i < 3; i++) {
           for (int j = 0; j < FoodsButCodeText.Length; j++) {
             if (Foods[i].text == FoodsButCodeText[j]) {
               if (Valid[j]) {
                 ButtonOrder[i] = true;
               }
+            }
+          }
+        }
+        for (int i = 0; i < Valid.Length; i++) {
+          if (Valid[i]) {
+            Debug.LogFormat("[The Kanye Encounter #{0}] {1} is the farthest one up on the table, so therefore Kanye will be most pleased with that.", moduleId, FoodsButCodeText[i]);
+            for (int j = i + 1; j < Valid.Length; j++) {
+              Valid[j] = false;
             }
           }
         }
@@ -253,7 +252,6 @@ public class TheKanyeEncounter : MonoBehaviour {
         ButtonOrder[q] = false;
       }
       INeedAbool = false;
-      AidsModuleCheck = false;
       for (int f = 0; f < Valid.Length; f++) {
         Valid[f] = false;
       }
@@ -267,9 +265,6 @@ public class TheKanyeEncounter : MonoBehaviour {
       if (Bomb.GetTime() * 2 <= Merica) {
         INeedAbool = true;
       }
-      if (Bomb.GetSolvedModuleNames().Count == 0) {
-        AidsModuleCheck = true;
-      }
       if (Ass) {
         for (int i = 0; i < 3; i++) {
           Foods[i].text = FoodsButCodeText[FooderPickerNumberSelector[i]];
@@ -279,7 +274,7 @@ public class TheKanyeEncounter : MonoBehaviour {
     }
 
     #pragma warning disable 414
-    private readonly string TwitchHelpMessage = @"Use !{0} # to select the corresponding option. Use !{0} highlight to highlight the module (the module will need to be highlighted in order to see the options).";
+    private readonly string TwitchHelpMessage = @"Use !{0} 1/2/3/4 to select the corresponding option from top to bottom. Use !{0} highlight to highlight the module (the module will need to be highlighted in order to see the options).";
     #pragma warning restore 414
 
     IEnumerator ProcessTwitchCommand(string Command) {
