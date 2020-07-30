@@ -21,7 +21,7 @@ public class TheKanyeEncounter : MonoBehaviour {
     int moduleId;
     private bool moduleSolved;
     bool Ass = false;
-    string[] FoodsButCodeText = {"Onion", "Corn", "big MIOLK", "Yam", "Corn Cube", "Egg", "Eggchips", "hamger", "Tyler the Creator", "Onionade", "Soup", "jeb"};
+    string[] FoodsButCodeText = {"Onion", "Corn [inedible]", "big MIOLK", "Yam", "Corn Cube", "Egg", "Eggchips", "hamger", "Tyler the Creator", "Onionade", "Soup", "jeb"};
     int[] FooderPickerNumberSelector = {0,0,0};
     string Feeling = "";
     bool[] Valid = {false, false, false, false, false, false, false, false, false, false, false, false};
@@ -32,6 +32,7 @@ public class TheKanyeEncounter : MonoBehaviour {
     string PleasedOff = "Thank you for the\noffering";
     int Jon = -1000000;
     bool PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj = false;
+    int Zaboomafoo = 0;
 
     void Awake () {
         moduleId = moduleIdCounter++;
@@ -56,7 +57,7 @@ public class TheKanyeEncounter : MonoBehaviour {
     }
 
     void MakeTheThingsNotThings() {
-      if (Ass || moduleSolved) {
+      if (Ass || moduleSolved || PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj) {
         return;
       }
       Audio.PlaySoundAtTransform("what", transform);
@@ -97,7 +98,7 @@ public class TheKanyeEncounter : MonoBehaviour {
               Debug.LogFormat("[The Kanye Encounter #{0}] Onion is currently valid.", moduleId);
             }
             break;
-            case "Corn": Debug.LogFormat("[The Kanye Encounter #{0}] Corn is inedible.", moduleId); break;
+            case "Corn [inedible]": Debug.LogFormat("[The Kanye Encounter #{0}] Corn is inedible.", moduleId); break;
             case "big MIOLK":
             for (int j = 0; j < 6; j++) {
               if (Bomb.GetSerialNumber()[j].ToString() == "B" || Bomb.GetSerialNumber()[j].ToString() == "1" || Bomb.GetSerialNumber()[j].ToString() == "G" || Bomb.GetSolvableModuleNames().Contains("Painting")) {
@@ -157,12 +158,14 @@ public class TheKanyeEncounter : MonoBehaviour {
             }
             break;
             case "jeb":
+            Zaboomafoo = 0;
             for (int j = 0; j < 6; j++) {
               if (!(Bomb.GetSerialNumber()[j].ToString() == "J" || Bomb.GetSerialNumber()[j].ToString() == "E" || Bomb.GetSerialNumber()[j].ToString() == "B")) {
-                Valid[11] = true;
+                Zaboomafoo += 1;
               }
             }
-            if (Valid[11]) {
+            if (Zaboomafoo == 6) {
+              Valid[11] = true;
               Debug.LogFormat("[The Kanye Encounter #{0}] jeb is currently valid.", moduleId);
             }
             break;
@@ -199,9 +202,11 @@ public class TheKanyeEncounter : MonoBehaviour {
               for (int j = 0; j < FoodsButCodeText.Length; j++) {
                 if (i == 3) {
                   Debug.LogFormat("[The Kanye Encounter #{0}] You selected Garlic Bread, but that was the least desirable option. Kanye is disappointed...", moduleId);
+                  break;
                 }
                 if (Foods[i].text == FoodsButCodeText[j] && i != 3) {
                   Debug.LogFormat("[The Kanye Encounter #{0}] You selected {1} which is incorrect. Kanye is disappointed...", moduleId, FoodsButCodeText[j]);
+                  break;
                 }
               }
               StartCoroutine(KanyeIsPissed());
@@ -265,7 +270,7 @@ public class TheKanyeEncounter : MonoBehaviour {
       if (Bomb.GetTime() * 2 <= Merica) {
         INeedAbool = true;
       }
-      if (Ass) {
+      if (Ass == true) {
         for (int i = 0; i < 3; i++) {
           Foods[i].text = FoodsButCodeText[FooderPickerNumberSelector[i]];
         }
