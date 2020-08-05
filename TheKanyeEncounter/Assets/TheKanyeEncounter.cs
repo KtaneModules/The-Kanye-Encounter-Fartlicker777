@@ -291,11 +291,14 @@ public class TheKanyeEncounter : MonoBehaviour {
       }
       int Whateverthefuckyouwanttocallit = 0;
       if (int.TryParse(Command, out Whateverthefuckyouwanttocallit)) {
+        yield return null;
         if (Whateverthefuckyouwanttocallit != 1 && Whateverthefuckyouwanttocallit != 2 && Whateverthefuckyouwanttocallit != 3 && Whateverthefuckyouwanttocallit != 4) {
+          yield return null;
           yield return "sendtochaterror Invalid command!";
           yield break;
         }
         else {
+          yield return null;
           Kanyes[int.Parse(Command) - 1].OnInteract();
         }
       }
