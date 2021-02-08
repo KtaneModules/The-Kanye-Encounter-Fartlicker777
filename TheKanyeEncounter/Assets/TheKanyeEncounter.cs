@@ -17,22 +17,28 @@ public class TheKanyeEncounter : MonoBehaviour {
     public KMSelectable sdijdnijknjdsanjkfdaknjfd;
     public GameObject[] Thingsandstuff;
 
+    int[] FooderPickerNumberSelector = {0,0,0};
+    int Jon = -1000000;
+    int Zaboomafoo = 0;
+
+    string[] FoodsButCodeText = {"Onion", "Corn [inedible]", "big MIOLK", "Yam", "Corn Cube", "Egg", "Eggchips", "hamger", "Tyler the Creator", "Onionade", "Soup", "jeb"};
+    string Day = String.Empty;
+    string Feeling = String.Empty;
+    string PissedOff = "i understand,\nhowever i am still\ndisappointed";
+    string PleasedOff = "Thank you for the\noffering";
+
+    bool[] ButtonOrder = new bool[3];
+    bool[] Valid = new bool[12];
+    bool Ass;
+    bool Activated;
+    bool INeedAbool;
+    bool PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj;
+
+    float Merica = 0;
+
     static int moduleIdCounter = 1;
     int moduleId;
     private bool moduleSolved;
-    bool Ass = false;
-    string[] FoodsButCodeText = {"Onion", "Corn [inedible]", "big MIOLK", "Yam", "Corn Cube", "Egg", "Eggchips", "hamger", "Tyler the Creator", "Onionade", "Soup", "jeb"};
-    int[] FooderPickerNumberSelector = {0,0,0};
-    string Feeling = "";
-    bool[] Valid = {false, false, false, false, false, false, false, false, false, false, false, false};
-    bool[] ButtonOrder = {false, false, false};
-    float Merica = 0;
-    bool INeedAbool = false;
-    string PissedOff = "i understand,\nhowever i am still\ndisappointed";
-    string PleasedOff = "Thank you for the\noffering";
-    int Jon = -1000000;
-    bool PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj = false;
-    int Zaboomafoo = 0;
 
     void Awake () {
         moduleId = moduleIdCounter++;
@@ -40,11 +46,16 @@ public class TheKanyeEncounter : MonoBehaviour {
         foreach (KMSelectable Kanye in Kanyes) {
             Kanye.OnInteract += delegate () { KanyePress(Kanye); return false; };
         }
+        GetComponent<KMBombModule>().OnActivate += Activate;
+    }
+
+    void Activate () {
+      Day = DateTime.Now.DayOfWeek.ToString();
+      Merica = Bomb.GetTime();
     }
 
     void Start () {
-
-      Merica = Bomb.GetTime();
+      Activated = true;
       StartCoroutine(Weed());
       switch (Bomb.GetSerialNumber()[5].ToString()) {
         case "0": case "6": Feeling = "Happy"; break;
@@ -57,7 +68,7 @@ public class TheKanyeEncounter : MonoBehaviour {
     }
 
     void MakeTheThingsNotThings() {
-      if (Ass || moduleSolved || PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj) {
+      if (Ass || moduleSolved || PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj || !Activated) {
         return;
       }
       Audio.PlaySoundAtTransform("what", transform);
@@ -100,10 +111,8 @@ public class TheKanyeEncounter : MonoBehaviour {
             break;
             case "Corn [inedible]": Debug.LogFormat("[The Kanye Encounter #{0}] Corn is inedible.", moduleId); break;
             case "big MIOLK":
-            for (int j = 0; j < 6; j++) {
-              if (Bomb.GetSerialNumber()[j].ToString() == "B" || Bomb.GetSerialNumber()[j].ToString() == "1" || Bomb.GetSerialNumber()[j].ToString() == "G" || Bomb.GetSolvableModuleNames().Contains("Painting")) {
-                Valid[2] = true;
-              }
+            if (Bomb.GetSerialNumber().Any(x => "B1G".Contains(x))) {
+              Valid[2] = true;
             }
             if (Valid[2]) {
               Debug.LogFormat("[The Kanye Encounter #{0}] big MIOLK is currently valid.", moduleId);
@@ -116,13 +125,13 @@ public class TheKanyeEncounter : MonoBehaviour {
             }
             break;
             case "Corn Cube":
-            if (Feeling == "") {
+            if (Feeling == String.Empty) {
               Valid[4] = true;
               Debug.LogFormat("[The Kanye Encounter #{0}] Corn Cube is currently valid.", moduleId);
             }
             break;
             case "Egg":
-            if (DateTime.Now.DayOfWeek.ToString() == "Monday" || DateTime.Now.DayOfWeek.ToString() == "Wednesday" || DateTime.Now.DayOfWeek.ToString() == "Friday") {
+            if ("MondayWednesdayFriday".Contains(Day)) {
               Valid[5] = true;
               Debug.LogFormat("[The Kanye Encounter #{0}] Egg is currently valid.", moduleId);
             }
@@ -182,7 +191,7 @@ public class TheKanyeEncounter : MonoBehaviour {
         }
         for (int i = 0; i < Valid.Length; i++) {
           if (Valid[i]) {
-            Debug.LogFormat("[The Kanye Encounter #{0}] {1} is the farthest one up on the table, so therefore Kanye will be most pleased with that.", moduleId, FoodsButCodeText[i]);
+            Debug.LogFormat("[The Kanye Encounter #{0}] {1} is the furthest one up on the table, therefore Kanye will be most pleased with that.", moduleId, FoodsButCodeText[i]);
             for (int j = i + 1; j < Valid.Length; j++) {
               Valid[j] = false;
             }
@@ -270,7 +279,7 @@ public class TheKanyeEncounter : MonoBehaviour {
       if (Bomb.GetTime() * 2 <= Merica) {
         INeedAbool = true;
       }
-      if (Ass == true) {
+      if (Ass) {
         for (int i = 0; i < 3; i++) {
           Foods[i].text = FoodsButCodeText[FooderPickerNumberSelector[i]];
         }
@@ -284,21 +293,18 @@ public class TheKanyeEncounter : MonoBehaviour {
 
     IEnumerator ProcessTwitchCommand(string Command) {
       Command = Command.Trim();
+      yield return null;
       if (Command.ToLower() == "highlight") {
-        yield return null;
         sdijdnijknjdsanjkfdaknjfd.OnHighlight();
         yield break;
       }
       int Whateverthefuckyouwanttocallit = 0;
       if (int.TryParse(Command, out Whateverthefuckyouwanttocallit)) {
-        yield return null;
         if (Whateverthefuckyouwanttocallit != 1 && Whateverthefuckyouwanttocallit != 2 && Whateverthefuckyouwanttocallit != 3 && Whateverthefuckyouwanttocallit != 4) {
-          yield return null;
           yield return "sendtochaterror Invalid command!";
           yield break;
         }
         else {
-          yield return null;
           Kanyes[int.Parse(Command) - 1].OnInteract();
         }
       }
