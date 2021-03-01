@@ -119,7 +119,7 @@ public class TheKanyeEncounter : MonoBehaviour {
             }
             break;
             case "Yam":
-            if (Bomb.GetSolvedModuleNames().Count == 0) {
+            if (Bomb.GetSolvableModuleNames().Count - 1 == Bomb.GetSolvedModuleNames().Count) {
               Valid[3] = true;
               Debug.LogFormat("[The Kanye Encounter #{0}] Yam is currently valid.", moduleId);
             }
