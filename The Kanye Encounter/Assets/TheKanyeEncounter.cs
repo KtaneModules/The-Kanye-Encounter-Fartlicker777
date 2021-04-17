@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using KModkit;
 
@@ -18,14 +16,13 @@ public class TheKanyeEncounter : MonoBehaviour {
    public GameObject[] Thingsandstuff;
 
    int[] FooderPickerNumberSelector = { 0, 0, 0 };
-   int Jon = -1000000;
-   int Zaboomafoo;
+   readonly int Jon = -1000000;
 
-   string[] FoodsButCodeText = { "Onion", "Corn [inedible]", "big MIOLK", "Yam", "Corn Cube", "Egg", "Eggchips", "hamger", "Tyler the Creator", "Onionade", "Soup", "jeb" };
+   readonly string[] FoodsButCodeText = { "Onion", "Corn [inedible]", "big MIOLK", "Yam", "Corn Cube", "Egg", "Eggchips", "hamger", "Tyler the Creator", "Onionade", "Soup", "jeb" };
    string Day = String.Empty;
    string Feeling = String.Empty;
-   string PissedOff = "i understand,\nhowever i am still\ndisappointed";
-   string PleasedOff = "Thank you for the\noffering";
+   readonly string PissedOff = "i understand,\nhowever i am still\ndisappointed";
+   readonly string PleasedOff = "Thank you for the\noffering";
 
    bool[] ButtonOrder = new bool[3];
    bool[] Valid = new bool[12];
@@ -51,6 +48,7 @@ public class TheKanyeEncounter : MonoBehaviour {
    void Activate () {
       Day = DateTime.Now.DayOfWeek.ToString();
       Merica = Bomb.GetTime();
+      Debug.LogFormat("[The Kanye Encounter #{0}] The day of the week is {1} with a starting time of {2} minute(s).", moduleId, Day, (int) Merica / 60);
    }
 
    void Start () {
@@ -313,10 +311,12 @@ public class TheKanyeEncounter : MonoBehaviour {
          yield break;
       }
       for (int i = 0; i < 4; i++) {
-         if (Command == Foods[i].text) {
+         if (Command == Foods[i].text.ToUpper()) {
             Kanyes[i].OnInteract();
+            yield break;
          }
       }
+      yield return "sendtochaterror I don't understand!";
    }
 
    IEnumerator TwitchHandleForcedSolve () {
