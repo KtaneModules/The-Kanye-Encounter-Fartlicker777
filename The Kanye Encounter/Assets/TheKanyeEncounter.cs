@@ -14,6 +14,7 @@ public class TheKanyeEncounter : MonoBehaviour {
    public GameObject TheBackStreetBoys;
    public KMSelectable sdijdnijknjdsanjkfdaknjfd;
    public GameObject[] Thingsandstuff;
+   public GameObject[] SelectionTicks;
 
    int[] FooderPickerNumberSelector = { 0, 0, 0 };
    readonly int Jon = -1000000;
@@ -26,9 +27,9 @@ public class TheKanyeEncounter : MonoBehaviour {
 
    bool[] ButtonOrder = new bool[3];
    bool[] Valid = new bool[12];
-   bool Ass;
+   bool FoodShown;
    bool Activated;
-   bool PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj;
+   bool PressedModule;
 
    float Merica = 0;
 
@@ -41,6 +42,8 @@ public class TheKanyeEncounter : MonoBehaviour {
       sdijdnijknjdsanjkfdaknjfd.OnHighlight += delegate () { MakeTheThingsNotThings(); };
       foreach (KMSelectable Kanye in Kanyes) {
          Kanye.OnInteract += delegate () { KanyePress(Kanye); return false; };
+         Kanye.OnHighlight += delegate () { HighlightSomething(Kanye);};
+         Kanye.OnHighlightEnded += delegate () { HideSomething(Kanye); };
       }
       GetComponent<KMBombModule>().OnActivate += Activate;
    }
@@ -51,7 +54,27 @@ public class TheKanyeEncounter : MonoBehaviour {
       Debug.LogFormat("[The Kanye Encounter #{0}] The day of the week is {1} with a starting time of {2} minute(s).", moduleId, Day, (int) Merica / 60);
    }
 
+   void HighlightSomething (KMSelectable Kanye) {
+      if (PressedModule) {
+         return;
+      }
+      for (int i = 0; i < 4; i++) {
+         if (Kanye == Kanyes[i]) {
+            SelectionTicks[i].gameObject.SetActive(true);
+         }
+      }
+   }
+
+   void HideSomething (KMSelectable Kanye) {
+      for (int i = 0; i < 4; i++) {
+         SelectionTicks[i].gameObject.SetActive(false);
+      }
+   }
+
    void Start () {
+      for (int i = 0; i < 4; i++) {
+         SelectionTicks[i].gameObject.SetActive(false);
+      }
       Activated = true;
       StartCoroutine(Weed());
       switch (Bomb.GetSerialNumber()[5].ToString()) {
@@ -64,11 +87,11 @@ public class TheKanyeEncounter : MonoBehaviour {
    }
 
    void MakeTheThingsNotThings () {
-      if (Ass || moduleSolved || PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj || !Activated) {
+      if (FoodShown || moduleSolved || PressedModule || !Activated) {
          return;
       }
       Audio.PlaySoundAtTransform("what", transform);
-      Ass = true;
+      FoodShown = true;
       FoodShower();
    }
 
@@ -98,7 +121,10 @@ public class TheKanyeEncounter : MonoBehaviour {
    }
 
    void KanyePress (KMSelectable Kanye) {
-      if (!PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj) {
+      if (!PressedModule) {
+         for (int i = 0; i < 4; i++) {
+            SelectionTicks[i].gameObject.SetActive(false);
+         }
          Calculate(false);
          for (int i = 0; i < 4; i++) {
             if (Kanye == Kanyes[i]) {
@@ -242,8 +268,8 @@ public class TheKanyeEncounter : MonoBehaviour {
    }
 
    IEnumerator KanyeIsPleased () {
-      PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj = true;
-      Ass = false;
+      PressedModule = true;
+      FoodShown = false;
       moduleSolved = true;
       for (int i = 0; i < 4; i++) {
          Foods[i].text = "";
@@ -260,14 +286,14 @@ public class TheKanyeEncounter : MonoBehaviour {
          Thingsandstuff[p].gameObject.SetActive(false);
          yield return new WaitForSeconds(.1f);
       }
-      Ass = true;
+      FoodShown = true;
       StopAllCoroutines();
-      PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj = false;
+      PressedModule = false;
    }
 
    IEnumerator KanyeIsPissed () {
-      PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj = true;
-      Ass = false;
+      PressedModule = true;
+      FoodShown = false;
       for (int i = 0; i < 4; i++) {
          Foods[i].text = "";
       }
@@ -288,8 +314,8 @@ public class TheKanyeEncounter : MonoBehaviour {
       GetComponent<KMBombModule>().HandleStrike();
       FoodPicker();
       FoodShower();
-      Ass = true;
-      PrEsXvRzZpGkvfdnsijnjfdiijfaijbfahbjlfdabjhlfdhlbjfdshlkijfnblkifbhkalebfhkjlhbjhksbhkgjbhgjkfsjhbhfdsafkjsnkfankjfarbekfbjhkdfbakjhfbdkjfbhkdsajbfahkj = false;
+      FoodShown = true;
+      PressedModule = false;
    }
 
    void FoodShower () {
