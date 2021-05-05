@@ -54,11 +54,17 @@ public class TheKanyeEncounter : MonoBehaviour {
       Day = DateTime.Now.DayOfWeek.ToString();
       Merica = Bomb.GetTime();
       Debug.LogFormat("[The Kanye Encounter #{0}] The day of the week is {1} with a starting time of {2} minute(s).", moduleId, Day, (int) Merica / 60);
+      switch (Bomb.GetSerialNumber()[5].ToString()) {
+         case "0": case "6": Feeling = "Happy"; break;
+         case "3": case "7": Feeling = "Angery"; break;
+         case "2": case "8": Feeling = "Confused"; break;
+         case "1": case "4": Feeling = "Presidential"; break;
+      }
       FoodPicker();
    }
 
    void HighlightSomething (KMSelectable Kanye) {
-      if (PressedModule || !LoadedIn) {
+      if (PressedModule) {
          return;
       }
       for (int i = 0; i < 4; i++) {
@@ -80,16 +86,10 @@ public class TheKanyeEncounter : MonoBehaviour {
       }
       Activated = true;
       StartCoroutine(Weed());
-      switch (Bomb.GetSerialNumber()[5].ToString()) {
-         case "0": case "6": Feeling = "Happy"; break;
-         case "3": case "7": Feeling = "Angery"; break;
-         case "2": case "8": Feeling = "Confused"; break;
-         case "1": case "4": Feeling = "Presidential"; break;
-      }
    }
 
    void MakeTheThingsNotThings () {
-      if (FoodShown || moduleSolved || PressedModule || !Activated) {
+      if (FoodShown || moduleSolved || PressedModule || !Activated || !LoadedIn) {
          return;
       }
       Audio.PlaySoundAtTransform("what", transform);
