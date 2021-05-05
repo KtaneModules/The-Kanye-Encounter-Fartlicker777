@@ -29,6 +29,7 @@ public class TheKanyeEncounter : MonoBehaviour {
    bool[] Valid = new bool[12];
    bool FoodShown;
    bool Activated;
+   bool LoadedIn;
    bool PressedModule;
 
    float Merica = 0;
@@ -49,13 +50,15 @@ public class TheKanyeEncounter : MonoBehaviour {
    }
 
    void Activate () {
+      LoadedIn = true;
       Day = DateTime.Now.DayOfWeek.ToString();
       Merica = Bomb.GetTime();
       Debug.LogFormat("[The Kanye Encounter #{0}] The day of the week is {1} with a starting time of {2} minute(s).", moduleId, Day, (int) Merica / 60);
+      FoodPicker();
    }
 
    void HighlightSomething (KMSelectable Kanye) {
-      if (PressedModule) {
+      if (PressedModule || !LoadedIn) {
          return;
       }
       for (int i = 0; i < 4; i++) {
@@ -83,7 +86,6 @@ public class TheKanyeEncounter : MonoBehaviour {
          case "2": case "8": Feeling = "Confused"; break;
          case "1": case "4": Feeling = "Presidential"; break;
       }
-      FoodPicker();
    }
 
    void MakeTheThingsNotThings () {
