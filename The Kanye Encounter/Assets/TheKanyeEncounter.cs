@@ -334,6 +334,7 @@ public class TheKanyeEncounter : MonoBehaviour {
    IEnumerator ProcessTwitchCommand (string Command) {
       Command = Command.Trim().ToUpper();
       yield return null;
+      yield return "solve";
       if (Command.ToLower() == "highlight") {
          sdijdnijknjdsanjkfdaknjfd.OnHighlight();
          yield break;
